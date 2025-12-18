@@ -1,0 +1,259 @@
+body {
+    font-family: 'Lato', sans-serif;
+}
+
+
+.container {
+    max-width: 1250px;
+    padding: 0 10px;
+    margin: 0 auto;
+    margin-top: 50px;
+    position: relative;
+    z-index: 1;
+}
+
+
+
+.zaglav {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: #1E212C;
+}
+
+.title {
+    font-weight: 900;
+    font-size: 46px;
+    line-height: 130%;
+}
+
+.top_title {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.catalog {
+    margin: 85px 0;
+
+}
+
+.filter {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tag_spisok {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+}
+
+.tag_item {
+    padding: 0;
+}
+
+.tag_link {
+    display: block;
+    padding: 10px 30px 10px 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 160%;
+    text-align: center;
+    color: #9A9CA5;
+    text-decoration: none;
+    transition: all .5s;
+}
+
+
+.tag_link:hover {
+    border: 1px solid red;
+    color: red;
+}
+
+.tag_item .active {
+    color: orange;
+}
+
+
+.seach_block {
+    position: relative;
+}
+
+.seach_icon {
+    position: absolute;
+    right: 14px;
+    top: 14px;
+}
+
+.seach {
+    width: 315px;
+    height: 44px;
+    padding: 11px 30px 11px 16px;
+}
+
+.seach::placeholder {
+    color: #9A9CA5;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+
+
+}
+
+.carts {
+    margin-top: 60px;
+    margin-bottom: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px 30px;
+}
+
+.cart {
+    box-shadow: 0 4px 4px 4px rgba(30, 33, 44, 0.03);
+    width: 390px;
+    border: 1px solid rgba(229, 232, 237, 1);
+    transition: all .5s;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.cart:hover {
+    box-shadow: 0 12px 10px -6px rgba(159, 25, 132, 0.04);
+    /* background-color: red; */
+
+}
+
+
+
+.cart_block {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cart_tag {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    color: #fff;
+    padding: 1px 8px;
+    width: max-content;
+    border-radius: 4px;
+
+}
+
+/* теги цвета */
+#Marketing .cart_tag {
+    background-color: #03CEA4;
+}
+
+#Management .cart_tag {
+    background-color: #5A87FC;
+}
+
+#HR .cart_tag {
+    background-color: #F89828;
+}
+
+#Design .cart_tag {
+    background-color: #F52F6E;
+}
+
+#Development .cart_tag {
+    background-color: #7772F1;
+}
+
+/*  */
+.cart_name {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 150%;
+
+
+}
+
+.cart_opisanie {
+    display: flex;
+    gap: 8px;
+}
+
+.cart_price {
+    color: #FF4242;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 150%;
+}
+
+.cart_avtor {
+    padding-left: 8px;
+    border-left: 1px solid #787A80;
+    font-size: 18px;
+    line-height: 150%;
+}
+
+.more {
+    display: flex;
+    gap: 16px;
+    margin: 0 auto;
+    font-family: Lato;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 160%;
+
+}
+
+/* svg анимация */
+.svg_an {
+    position: absolute;
+    z-index: 0;
+
+}
+
+.svg_an1 {
+    top: 50px;
+    right: 100px;
+
+}
+
+.svg_an2 {
+    top: 100px;
+    left: 200px;
+
+}
+
+.svg_an3 {
+    bottom: 100px;
+    left: 200px;
+
+}
+
+/*  */
+
+@media (max-width: 1230px) {
+
+
+    .seach_block {
+        margin-top: 10px;
+    }
+
+}
+
+@media (max-width: 480px) {
+    .cart {
+        width: 90%;
+    }
+
+
+
+}

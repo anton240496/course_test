@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- svg анимация по всему сайта -->
+  <img class="svg_an svg_an1" src="img/svg_an1.svg" alt="">
+  <img class="svg_an svg_an2" src="img/svg_an2.svg" alt="">
+  <img class="svg_an svg_an3" src="img/svg_an3.svg" alt="">
+  <!--  -->
+  <div class="container">
+    <header class="zaglav">
+      <h6 class="top_title">Enjoy your studying!</h6>
+      <h1 class="title">Our online courses</h1>
+    </header>
+    <section class="catalog">
+      <div class="filter">
+        <ul class="tag_spisok">
+          <li class="tag_item">
+            <a href="#all" class="tag_link">
+              <p class="tag_text">All
+                <sup class="tag_col">17</sup>
+              </p>
+            </a>
+          </li>
+          <li class="tag_item">
+            <a href="#Marketing" class="tag_link">
+              <p class="tag_text">Marketing
+                <sup class="tag_col">3</sup>
+              </p>
+            </a>
+          </li>
+          <li class="tag_item">
+            <a href="#Management" class="tag_link">
+              <p class="tag_text">Management
+                <sup class="tag_col">3</sup>
+              </p>
+            </a>
+          </li>
+          <li class="tag_item">
+            <a href="#HR" class="tag_link">
+              <p class="tag_text">HR & Recruting
+                <sup class="tag_col">5</sup>
+              </p>
+            </a>
+          </li>
+          <li class="tag_item">
+            <a href="#Design" class="tag_link">
+              <p class="tag_text">Design
+                <sup class="tag_col">2</sup>
+              </p>
+            </a>
+          </li>
+          <li class="tag_item">
+            <a href="#Development" class="tag_link">
+              <p class="tag_text">Development
+                <sup class="tag_col">3</sup>
+              </p>
+            </a>
+          </li>
+        </ul>
+        <form class="seach_block">
+          <input class="seach" type="text" placeholder="Search course...">
+          <svg class="seach_icon" width="16" height="16" viewBox="0 0 16 16" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_77852_97)">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M7.25016 2.16634C4.44272 2.16634 2.16683 4.44223 2.16683 7.24967C2.16683 10.0571 4.44272 12.333 7.25016 12.333C8.65276 12.333 9.9216 11.7658 10.842 10.8467C11.7642 9.92589 12.3335 8.6549 12.3335 7.24967C12.3335 4.44223 10.0576 2.16634 7.25016 2.16634ZM0.833496 7.24967C0.833496 3.70585 3.70634 0.833008 7.25016 0.833008C10.794 0.833008 13.6668 3.70585 13.6668 7.24967C13.6668 8.78248 13.1287 10.1905 12.2321 11.2939L14.9711 14.0278C15.2317 14.2879 15.2321 14.7101 14.972 14.9706C14.7119 15.2312 14.2898 15.2316 14.0292 14.9715L11.2888 12.2362C10.1863 13.13 8.78039 13.6663 7.25016 13.6663C3.70634 13.6663 0.833496 10.7935 0.833496 7.24967Z"
+                fill="#9A9CA5" />
+            </g>
+            <defs>
+              <clipPath id="clip0_77852_97">
+                <rect width="16" height="16" fill="white" />
+              </clipPath>
+            </defs>
+          </svg>
+        </form>
+      </div>
+      <div class="carts">
+        <div class="cart" id="Marketing">
+          <img class="cart_img" src="img/cart1.png" alt="">
+          <div class="cart_block">
+            <div class="cart_tag">Marketing</div>
+            <h3 class="cart_name">The Ultimate Google Ads Training Course</h3>
+            <div class="cart_opisanie">
+              <div class="cart_price">$100</div>
+              <p class="cart_avtor">by Jerome Bell</p>
+            </div>
+          </div>
+        </div>
+        <div class="cart" id="Management">
+          <img class="cart_img" src="img/cart2.png" alt="">
+          <div class="cart_block">
+            <div class="cart_tag">Management</div>
+            <h3 class="cart_name">Product Management Fundamentals</h3>
+            <div class="cart_opisanie">
+              <div class="cart_price">$480</div>
+              <p class="cart_avtor">by Marvin McKinney</p>
+            </div>
+          </div>
+        </div>
+        <div class="cart" id="HR">
+          <img class="cart_img" src="img/cart3.png" alt="">
+          <div class="cart_block">
+            <div class="cart_tag">HR &amp; Recruting</div>
+            <h3 class="cart_name">HR Management and Analytics</h3>
+            <div class="cart_opisanie">
+              <div class="cart_price">$200</div>
+              <p class="cart_avtor">by Leslie Alexander Li</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart" id="Marketing">
+          <img class="cart_img" src="img/cart4.png" alt="">
+          <div class="cart_block">
+            <div class="cart_tag">Marketing</div>
+            <h3 class="cart_name">Brand Management &amp; PR Communications</h3>
+            <div class="cart_opisanie">
+              <div class="cart_price">$530</div>
+              <p class="cart_avtor">by Kristin Watson</p>
+            </div>
+          </div>
+        </div>
+        <div class="cart" id="Design">
+          <img class="cart_img" src="img/cart5.png" alt="">
+          <div class="cart_block">
+            <div class="cart_tag">Design</div>
+            <h3 class="cart_name">Graphic Design Basic</h3>
+            <div class="cart_opisanie">
+              <div class="cart_price">$500</div>
+              <p class="cart_avtor">by Guy Hawkins</p>
+            </div>
+          </div>
+        </div>
+        <div class="cart" id="Management">
+          <img class="cart_img" src="img/cart6.png" alt="">
+          <div class="cart_block">
+            <div class="cart_tag">Management</div>
+            <h3 class="cart_name">Business Development Management</h3>
+            <div class="cart_opisanie">
+              <div class="cart_price">$400</div>
+              <p class="cart_avtor">by Dianne Russell</p>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="cart" id="Development">
+          <img class="cart_img" src="img/cart7.png" alt="">
+          <div class="cart_block">
+            <div class="cart_tag">Development</div>
+            <h3 class="cart_name">Highload Software Architecture</h3>
+            <div class="cart_opisanie">
+              <div class="cart_price">$600</div>
+              <p class="cart_avtor">by Brooklyn Simmons</p>
+            </div>
+          </div>
+        </div>
+        <div class="cart" id="HR">
+          <img class="cart_img" src="img/cart8.png" alt="">
+          <div class="cart_block">
+            <div class="cart_tag">HR & Recruting</div>
+            <h3 class="cart_name">Human Resources – Selection and Recruitment</h3>
+            <div class="cart_opisanie">
+              <div class="cart_price">$150</div>
+              <p class="cart_avtor">by Kathryn Murphy</p>
+            </div>
+          </div>
+        </div>
+        <div class="cart" id="Design">
+          <img class="cart_img" src="img/cart9.png" alt="">
+          <div class="cart_block">
+            <div class="cart_tag">Design</div>
+            <h3 class="cart_name">User Experience. Human-centered Design</h3>
+            <div class="cart_opisanie">
+              <div class="cart_price">$240</div>
+              <p class="cart_avtor">by Cody Fisher</p>
+            </div>
+          </div>
+
+
+
+        </div>
+        <div class="cart" id="Design">
+          <img class="cart_img" src="img/cart1.png" alt="">
+          <div class="cart_block">
+            <div class="cart_tag">Design</div>
+            <h3 class="cart_name">Advanced UI/UX Principles</h3>
+            <div class="cart_opisanie">
+              <div class="cart_price">$320</div>
+              <p class="cart_avtor">by Alex Turner</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart" id="Management">
+          <img class="cart_img" src="img/cart2.png" alt="">
+          <div class="cart_block">
+            <div class="cart_tag">Management</div>
+            <h3 class="cart_name">Strategic Leadership Workshop</h3>
+            <div class="cart_opisanie">
+              <div class="cart_price">$450</div>
+              <p class="cart_avtor">by Sarah Johnson</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart" id="Design">
+          <img class="cart_img" src="img/cart3.png" alt="">
+          <div class="cart_block">
+            <div class="cart_tag">Design</div>
+            <h3 class="cart_name">Mobile App Design Masterclass</h3>
+            <div class="cart_opisanie">
+              <div class="cart_price">$280</div>
+              <p class="cart_avtor">by Michael Chen</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart" id="Marketing">
+          <img class="cart_img" src="img/cart4.png" alt="">
+          <div class="cart_block">
+            <div class="cart_tag">Marketing</div>
+            <h3 class="cart_name">Social Media Marketing Strategy</h3>
+            <div class="cart_opisanie">
+              <div class="cart_price">$380</div>
+              <p class="cart_avtor">by Emma Wilson</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart" id="Design">
+          <img class="cart_img" src="img/cart5.png" alt="">
+          <div class="cart_block">
+            <div class="cart_tag">Design</div>
+            <h3 class="cart_name">Web Design Fundamentals</h3>
+            <div class="cart_opisanie">
+              <div class="cart_price">$220</div>
+              <p class="cart_avtor">by David Lee</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart" id="Development">
+          <img class="cart_img" src="img/cart6.png" alt="">
+          <div class="cart_block">
+            <div class="cart_tag">Development</div>
+            <h3 class="cart_name">Python Programming Basics</h3>
+            <div class="cart_opisanie">
+              <div class="cart_price">$350</div>
+              <p class="cart_avtor">by Robert Kim</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart" id="Design">
+          <img class="cart_img" src="img/cart7.png" alt="">
+          <div class="cart_block">
+            <div class="cart_tag">Design</div>
+            <h3 class="cart_name">Typography and Layout Design</h3>
+            <div class="cart_opisanie">
+              <div class="cart_price">$190</div>
+              <p class="cart_avtor">by Olivia Martinez</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart" id="HR">
+          <img class="cart_img" src="img/cart8.png" alt="">
+          <div class="cart_block">
+            <div class="cart_tag">HR & Recruting</div>
+            <h3 class="cart_name">Employee Engagement Strategies</h3>
+            <div class="cart_opisanie">
+              <div class="cart_price">$270</div>
+              <p class="cart_avtor">by James Anderson</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart" id="Design">
+          <img class="cart_img" src="img/cart9.png" alt="">
+          <div class="cart_block">
+            <div class="cart_tag">Design</div>
+            <h3 class="cart_name">Logo and Brand Identity Design</h3>
+            <div class="cart_opisanie">
+              <div class="cart_price">$310</div>
+              <p class="cart_avtor">by Sophia Williams</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart" id="Marketing">
+          <img class="cart_img" src="img/cart1.png" alt="">
+          <div class="cart_block">
+            <div class="cart_tag">Marketing</div>
+            <h3 class="cart_name">Content Marketing Mastery</h3>
+            <div class="cart_opisanie">
+              <div class="cart_price">$420</div>
+              <p class="cart_avtor">by Daniel Brown</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart" id="Design">
+          <img class="cart_img" src="img/cart2.png" alt="">
+          <div class="cart_block">
+            <div class="cart_tag">Design</div>
+            <h3 class="cart_name">3D Modeling and Animation Basics</h3>
+            <div class="cart_opisanie">
+              <div class="cart_price">$390</div>
+              <p class="cart_avtor">by Thomas White</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart" id="Management">
+          <img class="cart_img" src="img/cart3.png" alt="">
+          <div class="cart_block">
+            <div class="cart_tag">Management</div>
+            <h3 class="cart_name">Project Management Professional</h3>
+            <div class="cart_opisanie">
+              <div class="cart_price">$520</div>
+              <p class="cart_avtor">by Patricia Clark</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart" id="Design">
+          <img class="cart_img" src="img/cart4.png" alt="">
+          <div class="cart_block">
+            <div class="cart_tag">Design</div>
+            <h3 class="cart_name">Color Theory for Designers</h3>
+            <div class="cart_opisanie">
+              <div class="cart_price">$180</div>
+              <p class="cart_avtor">by Brian Taylor</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart" id="Development">
+          <img class="cart_img" src="img/cart5.png" alt="">
+          <div class="cart_block">
+            <div class="cart_tag">Development</div>
+            <h3 class="cart_name">JavaScript Advanced Concepts</h3>
+            <div class="cart_opisanie">
+              <div class="cart_price">$470</div>
+              <p class="cart_avtor">by Kevin Lewis</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart" id="Design">
+          <img class="cart_img" src="img/cart6.png" alt="">
+          <div class="cart_block">
+            <div class="cart_tag">Design</div>
+            <h3 class="cart_name">Product Packaging Design</h3>
+            <div class="cart_opisanie">
+              <div class="cart_price">$260</div>
+              <p class="cart_avtor">by Rachel Green</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart" id="HR">
+          <img class="cart_img" src="img/cart7.png" alt="">
+          <div class="cart_block">
+            <div class="cart_tag">HR & Recruting</div>
+            <h3 class="cart_name">Workplace Diversity Training</h3>
+            <div class="cart_opisanie">
+              <div class="cart_price">$330</div>
+              <p class="cart_avtor">by Christopher Hall</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart" id="Design">
+          <img class="cart_img" src="img/cart8.png" alt="">
+          <div class="cart_block">
+            <div class="cart_tag">Design</div>
+            <h3 class="cart_name">Motion Graphics Fundamentals</h3>
+            <div class="cart_opisanie">
+              <div class="cart_price">$290</div>
+              <p class="cart_avtor">by Amanda Scott</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart" id="Design">
+          <img class="cart_img" src="img/cart9.png" alt="">
+          <div class="cart_block">
+            <div class="cart_tag">Design</div>
+            <h3 class="cart_name">Illustration Techniques Digital</h3>
+            <div class="cart_opisanie">
+              <div class="cart_price">$240</div>
+              <p class="cart_avtor">by Jason Miller</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart" id="HR">
+          <img class="cart_img" src="img/cart3.png" alt="">
+          <div class="cart_block">
+            <div class="cart_tag">HR &amp; Recruting</div>
+            <h3 class="cart_name">Assistent</h3>
+            <div class="cart_opisanie">
+              <div class="cart_price">$200</div>
+              <p class="cart_avtor">by Leslie Alexander Li</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart" id="Marketing">
+          <img class="cart_img" src="img/cart4.png" alt="">
+          <div class="cart_block">
+            <div class="cart_tag">Marketing</div>
+            <h3 class="cart_name">Konsultant</h3>
+            <div class="cart_opisanie">
+              <div class="cart_price">$530</div>
+              <p class="cart_avtor">by Kristin Watson</p>
+            </div>
+          </div>
+        </div>
+        <div class="cart" id="Design">
+          <img class="cart_img" src="img/cart5.png" alt="">
+          <div class="cart_block">
+            <div class="cart_tag">Design</div>
+            <h3 class="cart_name">Promoution</h3>
+            <div class="cart_opisanie">
+              <div class="cart_price">$500</div>
+              <p class="cart_avtor">by Guy Hawkins</p>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <button class="more"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M2.09961 2C2.65189 2 3.09961 2.44772 3.09961 3V7.43632C4.75764 4.20928 8.11959 2 11.9996 2C16.3552 2 20.058 4.78413 21.4303 8.66675C21.6144 9.18747 21.3414 9.75879 20.8207 9.94284C20.3 10.1269 19.7287 9.85396 19.5446 9.33325C18.4459 6.22472 15.4813 4 11.9996 4C9.03957 4 6.45326 5.60799 5.06955 8H8.09957C8.65186 8 9.09957 8.44772 9.09957 9C9.09957 9.55228 8.65186 10 8.09957 10H2.09961C1.54732 10 1.09961 9.55228 1.09961 9V3C1.09961 2.44772 1.54732 2 2.09961 2Z"
+            fill="#424551" />
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M3.17664 14.0572C3.69736 13.8731 4.26868 14.146 4.45273 14.6668C5.55144 17.7753 8.51608 20 11.9978 20C14.9578 20 17.5441 18.392 18.9278 16H15.8978C15.3455 16 14.8978 15.5523 14.8978 15C14.8978 14.4477 15.3455 14 15.8978 14H21.8977C22.45 14 22.8977 14.4477 22.8977 15V21C22.8977 21.5523 22.45 22 21.8977 22C21.3455 22 20.8977 21.5523 20.8977 21V16.5637C19.2397 19.7907 15.8778 22 11.9978 22C7.64215 22 3.93936 19.2159 2.56705 15.3332C2.383 14.8125 2.65593 14.2412 3.17664 14.0572Z"
+            fill="#424551" />
+        </svg>
+        <p class="more_text">Load more</p>
+      </button>
+    </section>
+  </div>
+
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+  <script src="js/main.js"></script>
+</body>
+
+</html>

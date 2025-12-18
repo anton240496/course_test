@@ -2,47 +2,47 @@ document.addEventListener('DOMContentLoaded', function () {
     // ========== SVG АНИМАЦИЯ ==========
     const svgs = document.querySelectorAll('.svg_an');
 
-  function floatAnimation() {
-    const time = Date.now() * 0.001;
+    function floatAnimation() {
+        const time = Date.now() * 0.001;
 
-    svgs.forEach((svg, index) => {
-        // задаем скорость
-        const floatX = Math.sin(time * 0.3 + index) * (window.innerWidth / 2 - 100);
-        const floatY = Math.cos(time * 0.4 + index) * (window.innerHeight / 2 - 100);
+        svgs.forEach((svg, index) => {
+            // задаем скорость
+            const floatX = Math.sin(time * 0.3 + index) * (window.innerWidth / 2 - 100);
+            const floatY = Math.cos(time * 0.4 + index) * (window.innerHeight / 2 - 100);
 
-        // Вращение вокруг своей оси (разная скорость для каждого SVG)
-        const rotation = (time * 30 + index * 60) % 360; // 30 градусов в секунду
+            // Вращение вокруг своей оси (разная скорость для каждого SVG)
+            const rotation = (time * 30 + index * 60) % 360; // 30 градусов в секунду
 
-        // Центр экрана как базовая точка
-        const centerX = window.innerWidth / 2;
-        const centerY = window.innerHeight / 2;
+            // Центр экрана как базовая точка
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
 
-        // Позиция относительно центра
-        let newX = centerX + floatX;
-        let newY = centerY + floatY;
+            // Позиция относительно центра
+            let newX = centerX + floatX;
+            let newY = centerY + floatY;
 
-        const svgWidth = svg.offsetWidth || 50;
-        const svgHeight = svg.offsetHeight || 50;
+            const svgWidth = svg.offsetWidth || 50;
+            const svgHeight = svg.offsetHeight || 50;
 
-        // Ограничиваем границами окна
-        const maxX = window.innerWidth - svgWidth - 20;
-        const maxY = window.innerHeight - svgHeight - 20;
+            // Ограничиваем границами окна
+            const maxX = window.innerWidth - svgWidth - 20;
+            const maxY = window.innerHeight - svgHeight - 20;
 
-        // Проверяем границы
-        newX = Math.max(20, Math.min(newX, maxX));
-        newY = Math.max(20, Math.min(newY, maxY));
+            // Проверяем границы
+            newX = Math.max(20, Math.min(newX, maxX));
+            newY = Math.max(20, Math.min(newY, maxY));
 
-        // Применяем позицию и вращение
-        svg.style.position = 'fixed';
-        svg.style.left = newX + 'px';
-        svg.style.top = newY + 'px';
-        svg.style.zIndex = '0';
-        svg.style.transform = `rotate(${rotation}deg)`;
-        svg.style.transition = 'all 0.1s linear'; // Для плавности
-    });
+            // Применяем позицию и вращение
+            svg.style.position = 'fixed';
+            svg.style.left = newX + 'px';
+            svg.style.top = newY + 'px';
+            svg.style.zIndex = '0';
+            svg.style.transform = `rotate(${rotation}deg)`;
+            svg.style.transition = 'all 0.1s linear'; // Для плавности
+        });
 
-    requestAnimationFrame(floatAnimation);
-}
+        requestAnimationFrame(floatAnimation);
+    }
     // Запускаем анимацию
     floatAnimation();
 
@@ -106,32 +106,31 @@ document.addEventListener('DOMContentLoaded', function () {
     // Функция для поиска карточек по названию слева направо
 
 
-function searchCardsByName(query) {
-    const allCards = document.querySelectorAll('.cart');
-    searchQuery = query.toLowerCase().trim();
+    function searchCardsByName(query) {
+        const allCards = document.querySelectorAll('.cart');
+        searchQuery = query.toLowerCase().trim();
 
-    if (!searchQuery) {
-        return getFilteredCards(currentCategory);
-    }
-
-    let filteredCards = [];
-
-    allCards.forEach(card => {
-        const cardName = card.querySelector('.cart_name').textContent.toLowerCase();
-
-        // Проверяем соответствует ли карточка категории
-        const matchesCategory = currentCategory === 'all' || card.id === currentCategory;
-        
-        // Проверяем начинается ли все название с поискового запроса
-        const matchesSearch = cardName.startsWith(searchQuery);
-
-        if (matchesCategory && matchesSearch) {
-            filteredCards.push(card);
+        if (!searchQuery) {
+            return getFilteredCards(currentCategory);
         }
-    });
 
-    return filteredCards;
-}
+        let filteredCards = [];
+
+        allCards.forEach(card => {
+            const cardName = card.querySelector('.cart_name').textContent.toLowerCase();
+            const matchesCategory = currentCategory === 'all' || card.id === currentCategory;
+
+            // Проверяем начинается ли ЛЮБОЕ слово с поискового запроса
+            const words = cardName.split(/\s+/);
+            const matchesSearch = words.some(word => word.startsWith(searchQuery));
+
+            if (matchesCategory && matchesSearch) {
+                filteredCards.push(card);
+            }
+        });
+
+        return filteredCards;
+    }
     // Функция для получения отфильтрованных карточек
     function getFilteredCards(category) {
         const allCards = document.querySelectorAll('.cart');
@@ -220,12 +219,20 @@ function searchCardsByName(query) {
             Development: 0
         };
 
-        // Считаем карточки с учетом поискового запроса
+        // Считаем ВСЕ карточки с учетом поискового запроса
         allCards.forEach(card => {
             const cardName = card.querySelector('.cart_name').textContent.toLowerCase();
             const categoryId = card.id;
 
-            const matchesSearch = !searchQuery || cardName.includes(searchQuery);
+            // Проверяем соответствует ли карточка поисковому запросу
+            let matchesSearch = false;
+            if (searchQuery) {
+                // ТОТ ЖЕ САМЫЙ АЛГОРИТМ, что и в searchCardsByName!
+                const words = cardName.split(/\s+/);
+                matchesSearch = words.some(word => word.startsWith(searchQuery));
+            } else {
+                matchesSearch = true; // Если поиска нет, считаем все карточки
+            }
 
             if (matchesSearch && categoryCounts.hasOwnProperty(categoryId)) {
                 categoryCounts.all++;
@@ -332,11 +339,7 @@ function searchCardsByName(query) {
             tagLink.addEventListener('click', function (e) {
                 e.preventDefault();
 
-                // Сбрасываем поисковый запрос
-                if (searchInput) {
-                    searchInput.value = '';
-                    searchQuery = '';
-                }
+              
 
                 // Убираем активный класс у всех тегов
                 tagLinks.forEach(link => {

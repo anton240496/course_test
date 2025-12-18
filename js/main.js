@@ -6,59 +6,44 @@ document.addEventListener('DOMContentLoaded', function () {
         const time = Date.now() * 0.001;
 
         svgs.forEach((svg, index) => {
-            // задаем скорость
             const floatX = Math.sin(time * 0.3 + index) * (window.innerWidth / 2 - 100);
             const floatY = Math.cos(time * 0.4 + index) * (window.innerHeight / 2 - 100);
+            const rotation = (time * 30 + index * 60) % 360;
 
-            // Вращение вокруг своей оси (разная скорость для каждого SVG)
-            const rotation = (time * 30 + index * 60) % 360; // 30 градусов в секунду
-
-            // Центр экрана как базовая точка
             const centerX = window.innerWidth / 2;
             const centerY = window.innerHeight / 2;
 
-            // Позиция относительно центра
             let newX = centerX + floatX;
             let newY = centerY + floatY;
 
             const svgWidth = svg.offsetWidth || 50;
             const svgHeight = svg.offsetHeight || 50;
 
-            // Ограничиваем границами окна
             const maxX = window.innerWidth - svgWidth - 20;
             const maxY = window.innerHeight - svgHeight - 20;
 
-            // Проверяем границы
             newX = Math.max(20, Math.min(newX, maxX));
             newY = Math.max(20, Math.min(newY, maxY));
 
-            // Применяем позицию и вращение
             svg.style.position = 'fixed';
             svg.style.left = newX + 'px';
             svg.style.top = newY + 'px';
             svg.style.zIndex = '0';
             svg.style.transform = `rotate(${rotation}deg)`;
-            svg.style.transition = 'all 0.1s linear'; // Для плавности
+            svg.style.transition = 'all 0.1s linear';
         });
 
         requestAnimationFrame(floatAnimation);
     }
-    // Запускаем анимацию
+
     floatAnimation();
 
-    // Обновляем при изменении размера окна
-    window.addEventListener('resize', function () {
-        // Автоматически обновится в следующем кадре анимации
-    });
-
     // ========== ФИЛЬТРАЦИЯ КАРТОЧЕК И ПОИСК ==========
-    // Переменные состояния
     let currentCategory = 'all';
     let visibleCount = 9;
     let currentFilteredCards = [];
     let searchQuery = '';
 
-    // Элементы поиска
     const searchInput = document.querySelector('.seach');
     const searchForm = document.querySelector('.seach_block');
 
@@ -81,18 +66,14 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        // Обновляем цифры в тегах
         const tagItems = document.querySelectorAll('.tag_item');
-
         tagItems.forEach(tagItem => {
             const tagLink = tagItem.querySelector('.tag_link');
             const href = tagLink.getAttribute('href');
 
             if (href === '#all') {
                 const supElement = tagItem.querySelector('.tag_col');
-                if (supElement) {
-                    supElement.textContent = categoryCounts.all;
-                }
+                if (supElement) supElement.textContent = categoryCounts.all;
             } else {
                 const category = href.substring(1);
                 const supElement = tagItem.querySelector('.tag_col');
@@ -103,16 +84,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Функция для поиска карточек по названию слева направо
-
-
+    // Функция для поиска карточек по названию (только первое слово)
     function searchCardsByName(query) {
         const allCards = document.querySelectorAll('.cart');
         searchQuery = query.toLowerCase().trim();
 
-        if (!searchQuery) {
-            return getFilteredCards(currentCategory);
-        }
+        if (!searchQuery) return getFilteredCards(currentCategory);
 
         let filteredCards = [];
 
@@ -120,71 +97,54 @@ document.addEventListener('DOMContentLoaded', function () {
             const cardName = card.querySelector('.cart_name').textContent.toLowerCase();
             const matchesCategory = currentCategory === 'all' || card.id === currentCategory;
 
-            // Проверяем начинается ли ЛЮБОЕ слово с поискового запроса
             const words = cardName.split(/\s+/);
-            const matchesSearch = words.some(word => word.startsWith(searchQuery));
+            const firstWord = words[0] || '';
+            const matchesSearch = firstWord.startsWith(searchQuery);
 
-            if (matchesCategory && matchesSearch) {
-                filteredCards.push(card);
-            }
+            if (matchesCategory && matchesSearch) filteredCards.push(card);
         });
 
         return filteredCards;
     }
+
     // Функция для получения отфильтрованных карточек
     function getFilteredCards(category) {
         const allCards = document.querySelectorAll('.cart');
 
         if (!searchQuery) {
-            if (category === 'all') {
-                return Array.from(allCards);
-            } else {
-                return Array.from(allCards).filter(card => card.id === category);
-            }
-        } else {
-            // Если есть поисковый запрос, фильтруем и по категории и по поиску
-            let filteredCards = [];
-
-            allCards.forEach(card => {
-                const cardName = card.querySelector('.cart_name').textContent.toLowerCase();
-                const matchesCategory = category === 'all' || card.id === category;
-                const matchesSearch = cardName.includes(searchQuery);
-
-                if (matchesCategory && matchesSearch) {
-                    filteredCards.push(card);
-                }
-            });
-
-            return filteredCards;
+            return category === 'all' 
+                ? Array.from(allCards) 
+                : Array.from(allCards).filter(card => card.id === category);
         }
+
+        let filteredCards = [];
+        allCards.forEach(card => {
+            const cardName = card.querySelector('.cart_name').textContent.toLowerCase();
+            const words = cardName.split(/\s+/);
+            const firstWord = words[0] || '';
+            
+            const matchesCategory = category === 'all' || card.id === category;
+            const matchesSearch = firstWord.startsWith(searchQuery);
+
+            if (matchesCategory && matchesSearch) filteredCards.push(card);
+        });
+
+        return filteredCards;
     }
 
     // Функция для отображения карточек
     function displayCards(cardsToShow, startIndex = 0, count = visibleCount) {
         const allCards = document.querySelectorAll('.cart');
+        allCards.forEach(card => card.style.display = 'none');
 
-        // Сначала скрываем все карточки
-        allCards.forEach(card => {
-            card.style.display = 'none';
-        });
-
-        // Показываем нужные карточки в диапазоне
         const endIndex = Math.min(startIndex + count, cardsToShow.length);
-
         for (let i = startIndex; i < endIndex; i++) {
-            if (cardsToShow[i]) {
-                cardsToShow[i].style.display = 'block';
-            }
+            if (cardsToShow[i]) cardsToShow[i].style.display = 'block';
         }
 
-        // Обновляем состояние кнопки Load More
         const loadMoreButton = document.querySelector('.more');
         if (loadMoreButton) {
-            if (endIndex >= cardsToShow.length) {
-                loadMoreButton.style.display = 'none';
-            } else {
-                loadMoreButton.style.display = 'flex';
-            }
+            loadMoreButton.style.display = endIndex >= cardsToShow.length ? 'none' : 'flex';
         }
 
         return endIndex;
@@ -193,17 +153,11 @@ document.addEventListener('DOMContentLoaded', function () {
     // Функция для обновления отображения карточек
     function updateDisplay() {
         visibleCount = 9;
-
-        if (searchQuery) {
-            currentFilteredCards = searchCardsByName(searchQuery);
-        } else {
-            currentFilteredCards = getFilteredCards(currentCategory);
-        }
-
-        // Отображаем первые 9 карточек
+        currentFilteredCards = searchQuery 
+            ? searchCardsByName(searchQuery) 
+            : getFilteredCards(currentCategory);
+        
         displayCards(currentFilteredCards, 0, visibleCount);
-
-        // Обновляем счетчики в тегах для текущего поиска
         updateTagCountsForCurrentSearch();
     }
 
@@ -219,19 +173,17 @@ document.addEventListener('DOMContentLoaded', function () {
             Development: 0
         };
 
-        // Считаем ВСЕ карточки с учетом поискового запроса
         allCards.forEach(card => {
             const cardName = card.querySelector('.cart_name').textContent.toLowerCase();
             const categoryId = card.id;
 
-            // Проверяем соответствует ли карточка поисковому запросу
             let matchesSearch = false;
             if (searchQuery) {
-                // ТОТ ЖЕ САМЫЙ АЛГОРИТМ, что и в searchCardsByName!
                 const words = cardName.split(/\s+/);
-                matchesSearch = words.some(word => word.startsWith(searchQuery));
+                const firstWord = words[0] || '';
+                matchesSearch = firstWord.startsWith(searchQuery);
             } else {
-                matchesSearch = true; // Если поиска нет, считаем все карточки
+                matchesSearch = true;
             }
 
             if (matchesSearch && categoryCounts.hasOwnProperty(categoryId)) {
@@ -240,22 +192,19 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        // Обновляем цифры в тегах
         const tagItems = document.querySelectorAll('.tag_item');
-
         tagItems.forEach(tagItem => {
             const tagLink = tagItem.querySelector('.tag_link');
             const href = tagLink.getAttribute('href');
-
+            const supElement = tagItem.querySelector('.tag_col');
+            
+            if (!supElement) return;
+            
             if (href === '#all') {
-                const supElement = tagItem.querySelector('.tag_col');
-                if (supElement) {
-                    supElement.textContent = categoryCounts.all;
-                }
+                supElement.textContent = categoryCounts.all;
             } else {
                 const category = href.substring(1);
-                const supElement = tagItem.querySelector('.tag_col');
-                if (supElement && categoryCounts.hasOwnProperty(category)) {
+                if (categoryCounts.hasOwnProperty(category)) {
                     supElement.textContent = categoryCounts[category];
                 }
             }
@@ -265,66 +214,41 @@ document.addEventListener('DOMContentLoaded', function () {
     // Функция для загрузки следующих карточек
     function loadMoreCards() {
         if (currentFilteredCards.length === 0) {
-            if (searchQuery) {
-                currentFilteredCards = searchCardsByName(searchQuery);
-            } else {
-                currentFilteredCards = getFilteredCards(currentCategory);
-            }
+            currentFilteredCards = searchQuery 
+                ? searchCardsByName(searchQuery) 
+                : getFilteredCards(currentCategory);
         }
-
-        // Отображаем следующие 9 карточек
+        
         visibleCount = displayCards(currentFilteredCards, 0, visibleCount + 9);
     }
 
     // Инициализация при загрузке страницы
     function initialize() {
-        // Считаем карточки по категориям
         countCardsByCategory();
-
-        // Показываем первые 9 карточек (все)
         currentFilteredCards = getFilteredCards('all');
         displayCards(currentFilteredCards, 0, 9);
-
-        // Добавляем активный класс к тегу "All"
+        
         const allTag = document.querySelector('a[href="#all"]');
-        if (allTag) {
-            allTag.classList.add('active');
-        }
+        if (allTag) allTag.classList.add('active');
 
-        // Обработчик поиска
         if (searchInput) {
             searchInput.addEventListener('input', function (e) {
-                const query = e.target.value;
-
-                // Сохраняем поисковый запрос
-                searchQuery = query.toLowerCase().trim();
-
-                // Сбрасываем видимые карточки
+                searchQuery = e.target.value.toLowerCase().trim();
                 visibleCount = 9;
-
-                // Обновляем отображение
                 updateDisplay();
-
-                // Если есть поисковый запрос, снимаем активный класс с тегов
+                
+                // При поиске активируем тег "All"
                 if (searchQuery) {
+                    const allTag = document.querySelector('a[href="#all"]');
                     const tagLinks = document.querySelectorAll('.tag_link');
-                    tagLinks.forEach(link => {
-                        link.classList.remove('active');
-                    });
-                } else {
-                    // Если поиск очищен, активируем текущую категорию
-                    const currentTag = document.querySelector(`a[href="#${currentCategory}"]`);
-                    if (currentTag) {
-                        const tagLinks = document.querySelectorAll('.tag_link');
-                        tagLinks.forEach(link => {
-                            link.classList.remove('active');
-                        });
-                        currentTag.classList.add('active');
+                    tagLinks.forEach(link => link.classList.remove('active'));
+                    if (allTag) {
+                        allTag.classList.add('active');
+                        currentCategory = 'all';
                     }
                 }
             });
-
-            // Обработчик отправки формы (предотвращаем перезагрузку страницы)
+            
             if (searchForm) {
                 searchForm.addEventListener('submit', function (e) {
                     e.preventDefault();
@@ -332,45 +256,30 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        // Добавляем обработчики кликов на теги
         const tagLinks = document.querySelectorAll('.tag_link');
-
         tagLinks.forEach(tagLink => {
             tagLink.addEventListener('click', function (e) {
                 e.preventDefault();
-
-              
-
-                // Убираем активный класс у всех тегов
-                tagLinks.forEach(link => {
-                    link.classList.remove('active');
-                });
-
-                // Добавляем активный класс к текущему тегу
+                
+                // НЕ очищаем поиск при переключении тегов
+                // searchQuery сохраняется
+                
+                tagLinks.forEach(link => link.classList.remove('active'));
                 this.classList.add('active');
-
-                // Получаем категорию из href
-                const href = this.getAttribute('href');
-                currentCategory = href.substring(1);
-
-                // Обновляем отображение
+                
+                currentCategory = this.getAttribute('href').substring(1);
                 updateDisplay();
-
-                // Прокручиваем к началу
+                
                 const firstCard = document.querySelector('.cart[style*="display: block"]');
-                if (firstCard) {
-                    firstCard.scrollIntoView({ behavior: 'smooth' });
-                }
+                if (firstCard) firstCard.scrollIntoView({ behavior: 'smooth' });
             });
         });
 
-        // Обработчик для кнопки Load More
         const loadMoreButton = document.querySelector('.more');
         if (loadMoreButton) {
             loadMoreButton.addEventListener('click', loadMoreCards);
         }
     }
 
-    // Запускаем инициализацию
     initialize();
 });

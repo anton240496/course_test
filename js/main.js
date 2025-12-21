@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Функция для поиска карточек по названию (только первое слово)
+    // Функция для поиска карточек по названию (ВСЯ фраза)
     function searchCardsByName(query) {
         const allCards = document.querySelectorAll('.cart');
         searchQuery = query.toLowerCase().trim();
@@ -96,10 +96,9 @@ document.addEventListener('DOMContentLoaded', function () {
         allCards.forEach(card => {
             const cardName = card.querySelector('.cart_name').textContent.toLowerCase();
             const matchesCategory = currentCategory === 'all' || card.id === currentCategory;
-
-            const words = cardName.split(/\s+/);
-            const firstWord = words[0] || '';
-            const matchesSearch = firstWord.startsWith(searchQuery);
+            
+            // Проверяем начинается ли ВСЯ ФРАЗА с поискового запроса
+            const matchesSearch = cardName.startsWith(searchQuery);
 
             if (matchesCategory && matchesSearch) filteredCards.push(card);
         });
@@ -120,11 +119,10 @@ document.addEventListener('DOMContentLoaded', function () {
         let filteredCards = [];
         allCards.forEach(card => {
             const cardName = card.querySelector('.cart_name').textContent.toLowerCase();
-            const words = cardName.split(/\s+/);
-            const firstWord = words[0] || '';
             
             const matchesCategory = category === 'all' || card.id === category;
-            const matchesSearch = firstWord.startsWith(searchQuery);
+            // ТАКОЙ ЖЕ АЛГОРИТМ: ВСЯ фраза
+            const matchesSearch = cardName.startsWith(searchQuery);
 
             if (matchesCategory && matchesSearch) filteredCards.push(card);
         });
@@ -179,9 +177,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
             let matchesSearch = false;
             if (searchQuery) {
-                const words = cardName.split(/\s+/);
-                const firstWord = words[0] || '';
-                matchesSearch = firstWord.startsWith(searchQuery);
+                // ТАКОЙ ЖЕ АЛГОРИТМ: ВСЯ фраза
+                matchesSearch = cardName.startsWith(searchQuery);
             } else {
                 matchesSearch = true;
             }
@@ -246,6 +243,12 @@ document.addEventListener('DOMContentLoaded', function () {
                         allTag.classList.add('active');
                         currentCategory = 'all';
                     }
+                } else {
+                    // Если поиск очищен, возвращаем активный класс к текущей категории
+                    const currentTag = document.querySelector(`a[href="#${currentCategory}"]`);
+                    const tagLinks = document.querySelectorAll('.tag_link');
+                    tagLinks.forEach(link => link.classList.remove('active'));
+                    if (currentTag) currentTag.classList.add('active');
                 }
             });
             
@@ -260,9 +263,6 @@ document.addEventListener('DOMContentLoaded', function () {
         tagLinks.forEach(tagLink => {
             tagLink.addEventListener('click', function (e) {
                 e.preventDefault();
-                
-                // НЕ очищаем поиск при переключении тегов
-                // searchQuery сохраняется
                 
                 tagLinks.forEach(link => link.classList.remove('active'));
                 this.classList.add('active');

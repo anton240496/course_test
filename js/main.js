@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Функция для поиска карточек по названию (ВСЯ фраза)
+    // Функция для поиска карточек по названию (ВСЯ фраза с начало справо налево)
     function searchCardsByName(query) {
         const allCards = document.querySelectorAll('.cart');
         searchQuery = query.toLowerCase().trim();
